@@ -1,0 +1,87 @@
+﻿<Window x:Class="QuadralTimeApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuadralTimeApp"
+        mc:Ignorable="d"
+        Title="Quadral Time" Height="580" Width="1050"
+        Background="#10182A">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Quadral Time Clock Display -->
+        <Border Grid.Column="0" Grid.Row="0" Margin="24" CornerRadius="32" Background="#181F36" BorderBrush="#2D4DFF" BorderThickness="3">
+            <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <TextBlock Name="CycleCounter" FontSize="32" FontWeight="Bold" Foreground="#6CA0FF" HorizontalAlignment="Center" Margin="0,16,0,8" TextWrapping="Wrap"/>
+                <Viewbox Stretch="Uniform" MaxHeight="370" MaxWidth="370" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Canvas Name="ClockCanvas" Width="370" Height="370"/>
+                </Viewbox>
+            </StackPanel>
+        </Border>
+
+        <!-- Right Panel: Alarms Only -->
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="24" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <GroupBox Header="Alarms" Margin="0,0,0,10" Foreground="#6CA0FF" Background="#181F36" BorderBrush="#2D4DFF" BorderThickness="2">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        <TextBlock Text="Time:" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="#B0CFFF"/>
+                        <ComboBox Name="AlarmHourBox" Width="60" Margin="0,0,8,0" ToolTip="Hour (1-4)" Background="#232B45" Foreground="#4DA6FF" BorderBrush="#2D4DFF">
+                            <ComboBoxItem Content="1"/>
+                            <ComboBoxItem Content="2"/>
+                            <ComboBoxItem Content="3"/>
+                            <ComboBoxItem Content="4"/>
+                        </ComboBox>
+                        <TextBlock Text=":" VerticalAlignment="Center" Foreground="#B0CFFF"/>
+                        <ComboBox Name="AlarmMinuteBox" Width="50" Margin="8,0,8,0" ToolTip="Minute (00, 15, 30, 45)" Background="#232B45" Foreground="#4DA6FF" BorderBrush="#2D4DFF">
+                            <ComboBoxItem Content="00"/>
+                            <ComboBoxItem Content="15"/>
+                            <ComboBoxItem Content="30"/>
+                            <ComboBoxItem Content="45"/>
+                        </ComboBox>
+                        <ComboBox Name="AlarmCycleBox" Width="70" Margin="0,0,8,0" Background="#232B45" Foreground="#4DA6FF" BorderBrush="#2D4DFF">
+                            <ComboBoxItem Content="AM"/>
+                            <ComboBoxItem Content="MM"/>
+                            <ComboBoxItem Content="DM"/>
+                            <ComboBoxItem Content="PM"/>
+                            <ComboBoxItem Content="EM"/>
+                            <ComboBoxItem Content="NM"/>
+                        </ComboBox>
+                        <ComboBox Name="AlarmRecurrenceBox" Width="90" Margin="0,0,8,0" Background="#232B45" Foreground="#4DA6FF" BorderBrush="#2D4DFF">
+                            <ComboBoxItem Content="Once"/>
+                            <ComboBoxItem Content="Daily"/>
+                            <ComboBoxItem Content="Weekdays"/>
+                            <ComboBoxItem Content="Weekends"/>
+                        </ComboBox>
+                        <Button Name="AddAlarmButton" Content="Add" Width="60" Background="#2D4DFF" Foreground="White" FontWeight="Bold"/>
+                    </StackPanel>
+                    <ListBox Name="AlarmsList" Height="110" Background="#232B45" Foreground="#B0CFFF" BorderBrush="#2D4DFF" ItemContainerStyle="{x:Null}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel LastChildFill="True" Margin="0,0,0,2">
+                                    <Button Content="✕" Width="22" Height="22" Margin="0,0,6,0" VerticalAlignment="Center" HorizontalAlignment="Right" 
+                                            Background="#2D4DFF" Foreground="White" FontWeight="Bold" BorderThickness="0" Cursor="Hand"
+                                            Click="DeleteAlarmButton_Click" Tag="{Binding}"/>
+                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" FontSize="15"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Name="StopAlarmButton" Content="Stop Alarm" Background="#2D4DFF" Foreground="#FFF" FontWeight="Bold" Visibility="Collapsed" Margin="0,8,0,0"/>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+        <!-- Date Display at Bottom -->
+        <Border Grid.ColumnSpan="2" Grid.Row="1" Background="#181F36" Padding="10,6" VerticalAlignment="Bottom" BorderBrush="#2D4DFF" BorderThickness="2">
+            <TextBlock Name="DateDisplay" HorizontalAlignment="Center" FontSize="18" Foreground="#6CA0FF"/>
+        </Border>
+    </Grid>
+</Window>

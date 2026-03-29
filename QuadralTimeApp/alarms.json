@@ -1,0 +1,11 @@
+[
+  {
+    "QuadralHour": 2,
+    "QuadralMinute": 15,
+    "QuadralCycle": "NM",
+    "Time": "21:15:00",
+    "Recurrence": "Once",
+    "Active": true,
+    "LastTriggered": null
+  }
+]
