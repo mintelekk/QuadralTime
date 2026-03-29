@@ -340,19 +340,20 @@ namespace QuadralTimeApp
         ClockCanvas.Children.Add(circle);
 
         // Draw hour marks (1-4)
+        // Move numbers slightly inward to avoid overlap with border
         for (int i = 0; i < 4; i++)
         {
             double angle = (i / 4.0) * 360.0 - 90;
-            double x = _centerX + Math.Cos(angle * Math.PI / 180) * (_clockRadius - 30);
-            double y = _centerY + Math.Sin(angle * Math.PI / 180) * (_clockRadius - 30);
+            double x = _centerX + Math.Cos(angle * Math.PI / 180) * (_clockRadius - 38);
+            double y = _centerY + Math.Sin(angle * Math.PI / 180) * (_clockRadius - 38);
             TextBlock hourMark = new TextBlock
             {
                 Text = (i + 1).ToString(),
                 FontSize = 28,
                 FontWeight = FontWeights.Bold,
-                Foreground = Brushes.MidnightBlue
+                Foreground = new SolidColorBrush(Color.FromRgb(77, 166, 255)) // #4DA6FF
             };
-            Canvas.SetLeft(hourMark, x - 12);
+            Canvas.SetLeft(hourMark, x - 10);
             Canvas.SetTop(hourMark, y - 18);
             ClockCanvas.Children.Add(hourMark);
         }
